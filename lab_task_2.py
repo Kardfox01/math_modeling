@@ -1,11 +1,5 @@
-x = "Hello, World!"
-print(type(x))
+_n = int(input("n: ")) + 1
+b1 = int(input("b1: "))
+q = int(input("q: "))
 
-x = 3 + 4
-print(type(x))
-
-x = 3 / 4
-print(type(x))
-
-x = [1, 2, 5, 10, 100]
-print(type(x))
+print(*[b1 * q**(n - 1) for n in range(1, _n)])
