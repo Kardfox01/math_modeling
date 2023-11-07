@@ -1,11 +1,16 @@
-year = int(input("Год: "))
+from lab_task_1 import g
 
-if year % 4 != 0:
-    print(f"{year} год не является високосным")
-elif year % 100 == 0:
-    if year % 400 == 0:
-        print(f"{year} год является високосным")
-    else:
-        print(f"{year} год не является високосным")
-else:
-    print(f"{year} год является високосным")
+
+x0  = 0
+y0  = 0
+V0x = 10
+
+points = [
+    (
+        t,
+        x0 + V0x * t,
+        y0 + V0x * t - ((g * t**2) / 2)
+    ) for t in range(6)
+]
+
+print(*points, sep="\n")

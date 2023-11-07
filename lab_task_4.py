@@ -1,7 +1,13 @@
-number = int(input("Кол-ви чисел Фибоначчи: "))
-fibonacci = [1, 1]
+from numpy import ndarray, sin, double
 
-for i in range(number - 1):
-    fibonacci.append(fibonacci[-1] + fibonacci[-2])
 
-print(*fibonacci, sep=" ")
+N = M = 5
+
+A = ndarray((N, M), double)
+
+for i in range(N):
+    for j in range(M):
+        number = sin(N * (i + 1) + M * (j + 1))
+        A[i, j] = number if number > 0 else 0
+
+print(A)

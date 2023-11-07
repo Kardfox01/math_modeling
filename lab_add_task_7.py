@@ -1,12 +1,10 @@
-a = float(input("a = "))
-b = float(input("b = "))
-c = float(input("c = "))
+array = [int(input()) for _ in range(4)] + list("_")
 
-D = b**2 - 4 * a * c
-if D > 0:
-    print("x₁ =", (-b + D**.5) / 2 * a)
-    print("x₂ =", (-b - D**.5) / 2 * a)
-elif D == 0:
-    print("x = ", (-b) / (2 * a))
-else:
-    print("Корней нет")
+print(*array)
+
+number, position = int(input()), int(input())
+new_array = array[:position]
+new_array.append(number)
+new_array.extend(array[position:len(array) - 1])
+
+print(*new_array)

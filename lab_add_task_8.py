@@ -1,12 +1,10 @@
-a, b, c = [float(input()) for _ in range(3)]
-triangle_type = "Треугольник не существует"
+from numpy import ndarray, int64
 
-if a + b >= c and b + c >= a and a + c >= b:
-    if a == b and b == c and c == a:
-        triangle_type = "Треугольник существует, равностороний"
-    elif a == b or b == c or c == a:
-        triangle_type = "Треугольник существует, равнобедренный"
-    else:
-        triangle_type = "Треугольник существует, разносторонний"
+M, N = int(input()), int(input())
 
-print(triangle_type)
+array = ndarray((M, N), int64)
+
+for i in range(M * N):
+    array[i // N, i % N] = int(input())
+
+print(*[max(column) for column in list(zip(*array))])
