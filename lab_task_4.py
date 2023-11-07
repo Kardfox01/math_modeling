@@ -1,13 +1,7 @@
-from numpy import ndarray, sin, double
+from numpy import linspace, double
 
 
-N = M = 5
+def parabola(a, b, N):
+    return [x**2 for x in linspace(a + 1, b, N, double)]
 
-A = ndarray((N, M), double)
-
-for i in range(N):
-    for j in range(M):
-        number = sin(N * (i + 1) + M * (j + 1))
-        A[i, j] = number if number > 0 else 0
-
-print(A)
+print(parabola(-5, 5, 20))

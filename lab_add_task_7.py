@@ -1,10 +1,10 @@
-array = [int(input()) for _ in range(4)] + list("_")
+def fib(n):
+    numbers = [0, 1]
+    for _ in range(n - 2):
+        numbers.append(
+            numbers[-1] + numbers[-2]
+        )
 
-print(*array)
+    return numbers[n - 1]
 
-number, position = int(input()), int(input())
-new_array = array[:position]
-new_array.append(number)
-new_array.extend(array[position:len(array) - 1])
-
-print(*new_array)
+print(fib(10))

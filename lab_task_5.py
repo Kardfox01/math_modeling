@@ -1,6 +1,23 @@
-from lab_task_4 import A
+from numpy import pi
 
 
-A[:, [0, 1]] = A[:, [1, 0]]
+CIRCLE    = 0
+RECTANGLE = 1
+TRIANGLE  = 2
 
-print(A)
+
+def square(type, **kwargs):
+    if type == CIRCLE:
+        return pi * kwargs["r"]**2
+    elif type == RECTANGLE:
+        return kwargs["a"] * kwargs["b"]
+    elif type == TRIANGLE:
+        return (kwargs["a"] * kwargs["h"]) / 2
+
+
+
+print(
+    square(CIRCLE, r=5),
+    square(RECTANGLE, a=5, b=5),
+    square(TRIANGLE, a=5, h=5),
+)
