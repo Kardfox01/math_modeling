@@ -1,2 +1,2 @@
 number = input("Введите число: ")
-print(*reversed(number), sep="")
+print(*number[::-1], sep="")
