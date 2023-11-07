@@ -7,4 +7,4 @@ array = ndarray((M, N), int64)
 for i in range(M * N):
     array[i // N, i % N] = int(input())
 
-print(*[max(column) for column in list(zip(*array))])
+print(*[max(column) for column in zip(*array)])
