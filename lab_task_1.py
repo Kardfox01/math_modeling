@@ -1,11 +1,27 @@
-G  = 6.67 * 10**-11
-g  = 9.8
-c  = 299792458
-E0 = 8.85 * 10**-12
-me = 9.11 * 10**-31
-mp = 1.00728
-mn = 1.00866
-h  = 6.63 * 10**-34
-Na = 6.02 * 10**23
-R  = 8.31
-k  = 1.38 * 10**-23
+from numpy import array, random
+from random import randint as ri
+
+
+N = int(input())
+
+array1 = array([ri(0, 100) for _ in range(N)])
+array2 = array([ri(0, 100) for _ in range(N)])
+array3 = array([ri(0, 100) for _ in range(N)])
+
+maximum = max(
+    max(array1),
+    max(array2),
+    max(array3)
+)
+
+sum_array1 = sum(array1)
+sum_array2 = sum(array2)
+sum_array3 = sum(array3)
+
+print(maximum)
+print(
+    sum_array1,
+    sum_array2,
+    sum_array3,
+    sep=", "
+)

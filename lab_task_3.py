@@ -1,16 +1,19 @@
-from lab_task_1 import g
+from random import randint as ri
+from time import sleep, time
 
 
-x0  = 0
-y0  = 0
-V0x = 10
+M, N = ri(0, 5), ri(0, 5)
+print("M", M, "N", N)
 
-points = [
-    (
-        t,
-        x0 + V0x * t,
-        y0 + V0x * t - ((g * t**2) / 2)
-    ) for t in range(6)
-]
+start = time()
 
-print(*points, sep="\n")
+for i in range(0, M):
+    for j in range(0, N):
+        sleep(1)
+        print("j", j)
+    sleep(1)
+    print("i", i)
+
+stop = time()
+
+print("Theoretical", M * (N + 1), "Real", stop - start)
