@@ -1,19 +1,16 @@
-from random import randint as ri
-from time import sleep, time
+import matplotlib.pyplot as plt
+import numpy as np
 
 
-M, N = ri(0, 5), ri(0, 5)
-print("M", M, "N", N)
+def circle(a=-10, b=10, N=100):
+    x = np.linspace(a, b, N)
+    y = x.copy()
 
-start = time()
+    X, Y = np.meshgrid(x, y)
+    f = X**2 + Y**2 - 10**2
 
-for i in range(0, M):
-    for j in range(0, N):
-        sleep(1)
-        print("j", j)
-    sleep(1)
-    print("i", i)
+    plt.contour(X, Y, f, levels=(0,))
+    plt.axis("equal")
+    plt.show()
 
-stop = time()
-
-print("Theoretical", M * (N + 1), "Real", stop - start)
+circle()

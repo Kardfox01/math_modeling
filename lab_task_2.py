@@ -1,9 +1,12 @@
-name = "Georgii Kaigorodov"
-name = list(name)
+import matplotlib.pyplot as plt
+import numpy as np
 
-for i in range(1, len(name) * 2, 2):
-    name.insert(i, "_")
 
-name = list(map(ord, name))
+def parabola(a=-10, b=10, N=100):
+    x = np.linspace(a, b, N)
+    y = x**2
 
-print(max(name),min(name))
+    plt.plot(x, y)
+    plt.show()
+
+parabola()
