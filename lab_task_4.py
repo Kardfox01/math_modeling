@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import numpy as np
-from numpy import pi, e, sin, cos
 
 
 X, Y = 0, 1
