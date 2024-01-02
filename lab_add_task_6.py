@@ -1,13 +1,48 @@
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 import numpy as np
+from numpy import pi
 
 
-def polar_ellipse(p, ε, ф):
-    return p / (1 + ε*np.cos(ф))
+X, Y = 0, 1
+R = .06
 
-ε = .9
-p = 1
-ф = np.arange(0, 2*np.pi, .01)
 
-plt.polar(ф, polar_ellipse(p, ε, ф))
+def sin1_update(frame):
+    x = np.linspace(-4*pi, 4*pi, 500)
+    y = 2*np.sin(x*3)
+
+    sin1.set_data(x + frame, y)
+
+
+def sin2_update(frame):
+    x = np.linspace(-4*pi, 4*pi, 500)
+    y = 3*np.sin(x*.5)
+
+    sin2.set_data(x - frame, y)
+
+
+figure, ax = plt.subplots()
+
+sin1, = plt.plot([], [], "g")
+sin2, = plt.plot([], [], "b")
+
+ax.set_xlim(-2*pi, 2*pi)
+ax.set_ylim(-3, 3)
+
+sin1_animation = FuncAnimation(
+    figure,
+    sin1_update,
+    frames=np.linspace(-2*pi, 2*pi, 100),
+    interval=10
+)
+
+sin2_animation = FuncAnimation(
+    figure,
+    sin2_update,
+    frames=np.linspace(-2*pi, 2*pi, 100),
+    interval=10
+)
+
+# plt.axis("equal")
 plt.show()

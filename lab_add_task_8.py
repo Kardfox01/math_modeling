@@ -1,24 +1,38 @@
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 import numpy as np
+from itertools import tee
+from numpy import sin, cos
 
 
-def stairs(N):
-    x, y = [0], [0]
-    for _ in range(N):
-        x.append(x[-1])
-        y.append(y[-1] + 5)
+X, Y = 0, 1
 
-        x.append(x[-1] + 5)
-        y.append(y[-1])
+square_data = [
+    np.array([-5, -5, 5, 5, -5]),
+    np.array([-5, 5, 5, -5, -5])
+]
 
-    x.append(x[-1])
-    y.append(0)
 
-    x.append(0)
-    y.append(0)
+def square_update(frame):
+    square.set_data(
+        square_data[X]*cos(frame) - square_data[Y]*sin(frame),
+        square_data[Y]*cos(frame) + square_data[X]*sin(frame)
+    )
 
-    plt.axis("equal")
-    plt.plot(x, y)
-    plt.show()
 
-stairs(10)
+figure, ax = plt.subplots()
+
+square, = plt.plot([], [], "r")
+
+ax.set_xlim(-10, 10)
+ax.set_ylim(-10, 10)
+
+square_animation = FuncAnimation(
+    figure,
+    square_update,
+    frames=np.linspace(-5, 5, 1000),
+    interval=10
+)
+
+plt.axis("equal")
+plt.show()

@@ -1,43 +1,63 @@
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 import numpy as np
+from numpy import pi
+from utils import revlinspace
 
 
-def fx(t):
-    return A * np.sin(a*t + δ)
+X, Y = 0, 1
+R = .06
 
-def fy(t):
-    return B * np.sin(b*t)
 
-def points():
-    t = np.arange(-10, 10, .1)
-    x = list(map(fx, t))
-    y = list(map(fy, t))
+def point_cycloid_update(frame):
+    point_cycloid.set_data(
+        [2 * R * (frame - np.sin(frame))],
+        [2 * R * (frame - np.cos(frame))]
+    )
 
-    return x, y
 
-A = 1
-a = 1
-B = 10
-b = 2
-δ = np.pi / 2
+def point_asteroid_update(frame):
+    point_asteroid.set_data(
+        [5 * R * np.cos(frame)**3],
+        [5 * R * np.sin(frame)**3]
+    )
 
-plt.plot(*points())
-plt.show()
 
-A = 1
-a = 1
-B = 10
-b = 4
-δ = np.pi / 2
+figure, (ax1, ax2) = plt.subplots(2, 1)
 
-plt.plot(*points())
-plt.show()
+cycloid, = ax1.plot(
+    [2 * R * (frame - np.sin(frame)) for frame in np.linspace(-4*pi, 4*pi, 100)],
+    [2 * R * (frame - np.cos(frame)) for frame in np.linspace(-4*pi, 4*pi, 100)],
+    "b"
+)
 
-A = 1
-a = 1
-B = 10
-b = 0.5
-δ = np.pi / 12
+astroid, = ax2.plot(
+    [5 * R * np.cos(frame)**3 for frame in np.linspace(0, 2 * pi, 100)],
+    [5 * R * np.sin(frame)**3 for frame in np.linspace(0, 2 * pi, 100)],
+    "g"
+)
 
-plt.plot(*points())
+point_cycloid,  = ax1.plot([], [], "or")
+point_asteroid, = ax2.plot([], [], "or")
+
+ax1.set_xlim(-3, 3)
+ax2.set_xlim(-1.5, 1.5)
+ax1.set_ylim(-1.5, 1.5)
+ax2.set_ylim(-3, 3)
+
+point_cycloid_animation = FuncAnimation(
+    figure,
+    point_cycloid_update,
+    frames=revlinspace(-4 * pi, 4 * pi, 100),
+    interval=10
+)
+
+point_astroid_animation = FuncAnimation(
+    figure,
+    point_asteroid_update,
+    frames=np.linspace(0, 2 * pi, 100),
+    interval=10
+)
+
+plt.axis("equal")
 plt.show()

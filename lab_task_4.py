@@ -1,36 +1,39 @@
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 import numpy as np
+from numpy import pi, e, sin, cos
 
 
-# Я понятия не имею, как это сделать с meshgrid и формулами перевода
+X, Y = 0, 1
 
-ф = np.arange(0, 8*np.pi, .01)
+C, D = .4, .2
+fractal_data = [[.1], [.1]]
 
-def spiral(b=.19):
-    r = np.exp(b*ф)
 
-    plt.polar(ф, r)
-    plt.show()
+def fractal_update(frame):
+    fractal_data[X].append(
+        fractal_data[X][-1]**2 - fractal_data[Y][-1]**2 + C
+    )
+    fractal_data[Y].append(
+        2*fractal_data[X][-1]*fractal_data[Y][-1] + D
+    )
 
-def arch_spiral(k=1):
-    r = k*ф
+    fractal.set_data(fractal_data)
 
-    plt.polar(ф, r)
-    plt.show()
 
-def rod_spiral(k=1):
-    r = k / np.sqrt(ф)
+figure, ax = plt.subplots()
 
-    plt.polar(ф, r)
-    plt.show()
+fractal, = plt.plot([], [], "r")
 
-def rose(k=.1):
-    r = np.sin(k*ф)
+ax.set_xlim(-1, 1)
+ax.set_ylim(-1, 1)
 
-    plt.polar(ф, r)
-    plt.show()
+fractal_animation = FuncAnimation(
+    figure,
+    fractal_update,
+    frames=10,
+    interval=200
+)
 
-spiral()
-arch_spiral()
-rod_spiral()
-rose()
+plt.axis("equal")
+plt.show()

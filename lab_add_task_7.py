@@ -1,20 +1,33 @@
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 import numpy as np
+from numpy import sin, cos
 
 
-def f(x):
-    if x < a:
-        return a**2
-    elif x > b:
-        return b**2
-    else:
-        return x**2
+def star_update(frame):
+    area = np.linspace(-25, 25, 100)
+    x = 12*cos(area) + 8*cos(1.5*area)
+    y = 12*sin(area) - 8*sin(1.5*area)
 
-a = 0
-b = 10
+    star.set_data(
+        x*cos(frame) - y*sin(frame),
+        y*cos(frame) + x*sin(frame)
+    )
 
-x = np.arange(-9, 20, 1)
-y = list(map(f, x))
 
-plt.plot(x, y)
+figure, ax = plt.subplots()
+
+star, = plt.plot([], [], "y")
+
+ax.set_xlim(-26, 26)
+ax.set_ylim(-26, 26)
+
+star_animation = FuncAnimation(
+    figure,
+    star_update,
+    frames=np.linspace(-25, 25, 500),
+    interval=10
+)
+
+plt.axis("equal")
 plt.show()
